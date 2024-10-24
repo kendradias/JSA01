@@ -5,6 +5,32 @@ html {
     padding: 0;
 }
 
+#score-board {
+    display: flex;
+    align-items: center;
+    background-color: green;
+}
+
+#game-board {
+    width: 100%;
+    padding: 20px;
+    background-color: greenyellow;
+}
+
+#player-form-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+#game-buttons {
+    display: flex;
+    justify-content: flex-start;
+    color: purple;
+    gap: 10px
+}
+
 body {
     width: 100%;
 }
