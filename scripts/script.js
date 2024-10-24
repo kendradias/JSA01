@@ -27,7 +27,7 @@ const game = {
     updatePlayerScore: function (playerScore) {
         this.playerScoreDisplay.textContent = playerScore;
     },
-}
+};
 
 // Player Object
 const player = {
@@ -43,7 +43,7 @@ const player = {
         this.score += 1;
         game.updatePlayerScore(this.score);
     },
-}
+};
 
 // recent players list properties and functionality - double click input field to display 1st time
 const recentPlayers = [];
@@ -51,12 +51,12 @@ const recentPlayersList = document.getElementById('recent-players');
 
 function updateRecentPlayers() {
     recentPlayersList.innerHTML = ''; //clears list
-    const playersToShow = recentPlayers.slice(-5) //shows last 5 players
+    const playersToShow = recentPlayers.slice(-5); //shows last 5 players
     playersToShow.forEach(player => {
         const option = document.createElement('option');
         option.value = player;
         recentPlayersList.appendChild(option);
-    })
+    });
 };
 
 // Event Listeners
@@ -65,12 +65,12 @@ game.joinGameButton.addEventListener('click', function() {
     if (playerName) {
         player.updatePlayerName(playerName);
         player.score = 0; // reset to 0
-        game.updatePlayerScore(player.score)
+        game.updatePlayerScore(player.score);
         recentPlayers.push(playerName);
         updateRecentPlayers();
-        game.playerForm.value = '';
+        game.playerForm.value = ''; //clear input field after join
     } else {
-        alert('Please enter player name')
+        alert('Please enter player name');
     }
 });
 
