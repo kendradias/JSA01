@@ -8,9 +8,7 @@ html {
 #score-board {
     display: flex;
     align-items: center;
-    background-color: green;
     padding: 30px;
-    border-radius: 8px;;
 }
 
 #player-name, #player-score {
@@ -38,10 +36,6 @@ html {
     justify-content: flex-start;
     color: purple;
     gap: 10px
-}
-
-body {
-    width: 100%;
 }
 
 main {
