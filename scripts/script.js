@@ -32,13 +32,19 @@ const game = {
 // Player Object
 const player = {
     //properties
-    name: "",
+    name: '',
     score: 0,
     //methods
     updatePlayerName: function (playerName) {
         this.playerName = playerName;
         game.updatePlayerName(playerName);
     },
+    scorePoints: function () {
+        this.playerScore += 1;
+        game.updatePlayerScore(this.playerScore);
+    },
+    
+
 
 }
 
@@ -48,4 +54,14 @@ game.joinGameButton.addEventListener('click', function() {
     if (playerName) {
         player.updatePlayerName(playerName);
     }
-})
+});
+
+game.startGameButton.addEventListener('click', function(){
+    game.toggleRunning();
+});
+
+game.scorePointsButton.addEventListener('click', function() {
+    if (game.isRunning) {
+        player.scorePoints();
+    }
+});
