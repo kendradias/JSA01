@@ -10,6 +10,7 @@ html {
     align-items: center;
     background-color: green;
     padding: 30px;
+    border-radius: 8px;;
 }
 
 #player-name, #player-score {
@@ -21,8 +22,7 @@ html {
 }
 
 #game-board {
-    width: 100%;
-    padding: 20px;
+    padding: 30px;
     background-color: greenyellow;
 }
 
@@ -47,8 +47,10 @@ body {
 main {
     background-color: rgb(98, 178, 98);
     height: 100vh;
+    max-width: 800px;
+    border-radius: 8px;
 }
 
 footer {
-    text-align: center;
+    text-align: left;
 }
