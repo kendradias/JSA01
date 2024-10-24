@@ -48,6 +48,8 @@ main {
     height: 100vh;
     max-width: 800px;
     border-radius: 8px;
+    background-image: url('../images/darksand.jpg');
+    background-size: cover;
 }
 
 footer {
