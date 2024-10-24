@@ -19,7 +19,7 @@ const game = {
     toggleRunning: function () {
         this.isRunning = !this.isRunning;
         this.gameBoard.classList.toggle('running', this.isRunning);
-        this.startGameButton.textContent = this.isRunning ? 'Stop Game' : 'Start Game';
+        this.startGameButton.textContent = this.isRunning ? 'Pause' : 'Start Game';
     },
     updatePlayerName: function (playerName) {
         this.playerNameDisplay.textContent = playerName;
@@ -44,6 +44,8 @@ const player = {
         game.updatePlayerScore(this.score);
     },
 }
+
+// recent players list properties and functionality
 const recentPlayers = [];
 const recentPlayersList = document.getElementById('recent-players');
 
@@ -65,11 +67,14 @@ game.joinGameButton.addEventListener('click', function() {
         recentPlayers.push(playerName);
         updateRecentPlayers();
         game.playerForm.value = '';
+    } else {
+        alert('Please enter player name')
     }
 });
 
 game.startGameButton.addEventListener('click', function(){
     game.toggleRunning();
+
 });
 
 game.scorePointsButton.addEventListener('click', function() {
