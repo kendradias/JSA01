@@ -6,9 +6,13 @@ html {
 }
 
 #score-board {
+    background-color: rgb(20, 40, 31);
+    border-radius: 8px 8px 0 0;
+    color: rgb(95, 95, 95);
     display: flex;
     align-items: center;
-    padding: 30px;
+    padding: 50px;
+    text-align: center;
 }
 
 #player-name, #player-score {
@@ -17,11 +21,12 @@ html {
 
 #player-info {
     text-align: center;
+    width: 100%;
 }
 
 #game-board {
     padding: 30px;
-    background-color: greenyellow;
+    
 }
 
 #player-form-container {
@@ -39,7 +44,7 @@ html {
 }
 
 main {
-    background-color: rgb(98, 178, 98);
+    background-color: rgb(36, 36, 36);
     height: 100vh;
     max-width: 800px;
     border-radius: 8px;
