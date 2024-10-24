@@ -40,12 +40,9 @@ const player = {
         game.updatePlayerName(playerName);
     },
     scorePoints: function () {
-        this.playerScore += 1;
-        game.updatePlayerScore(this.playerScore);
+        this.score += 1;
+        game.updatePlayerScore(this.score);
     },
-    
-
-
 }
 
 // Event Listeners
