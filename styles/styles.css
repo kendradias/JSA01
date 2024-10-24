@@ -1,3 +1,4 @@
+/* Reset */
 @charset "utf-8";
 html {
     box-sizing: border-box;
@@ -5,6 +6,7 @@ html {
     padding: 0;
 }
 
+/* Scoreboard Styling */
 #score-board {
     background-color: rgb(20, 40, 31);
     border-radius: 8px 8px 0 0;
@@ -22,11 +24,13 @@ html {
 #player-info {
     text-align: center;
     width: 100%;
+    font-weight: bold;
+    font-size: 20px;
 }
 
+/* Gameboard Styling */
 #game-board {
     padding: 30px;
-    
 }
 
 #player-form-container {
@@ -39,10 +43,10 @@ html {
 #game-buttons {
     display: flex;
     justify-content: flex-start;
-    color: purple;
-    gap: 10px
+    gap: 10px;
 }
 
+/* Main Content Styling */
 main {
     background-color: rgb(36, 36, 36);
     height: 100vh;
@@ -50,8 +54,10 @@ main {
     border-radius: 8px;
     background-image: url('../images/darksand.jpg');
     background-size: cover;
+    font-family: sans-serif;
 }
 
 footer {
     text-align: left;
+    font-family: sans-serif;
 }
