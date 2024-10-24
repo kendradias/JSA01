@@ -45,12 +45,12 @@ const player = {
     },
 }
 
-// recent players list properties and functionality
+// recent players list properties and functionality - double click input field to display 1st time
 const recentPlayers = [];
 const recentPlayersList = document.getElementById('recent-players');
 
 function updateRecentPlayers() {
-    recentPlayersList.innerHTML = ''; //clears list before update
+    recentPlayersList.innerHTML = ''; //clears list
     const playersToShow = recentPlayers.slice(-5) //shows last 5 players
     playersToShow.forEach(player => {
         const option = document.createElement('option');
@@ -64,6 +64,8 @@ game.joinGameButton.addEventListener('click', function() {
     const playerName = game.playerForm.value.trim();
     if (playerName) {
         player.updatePlayerName(playerName);
+        player.score = 0; // reset to 0
+        game.updatePlayerScore(player.score)
         recentPlayers.push(playerName);
         updateRecentPlayers();
         game.playerForm.value = '';
