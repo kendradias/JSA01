@@ -44,12 +44,27 @@ const player = {
         game.updatePlayerScore(this.score);
     },
 }
+const recentPlayers = [];
+const recentPlayersList = document.getElementById('recent-players');
+
+function updateRecentPlayers() {
+    recentPlayersList.innerHTML = ''; //clears list before update
+    const playersToShow = recentPlayers.slice(-5) //shows last 5 players
+    playersToShow.forEach(player => {
+        const option = document.createElement('option');
+        option.value = player;
+        recentPlayersList.appendChild(option);
+    })
+};
 
 // Event Listeners
 game.joinGameButton.addEventListener('click', function() {
     const playerName = game.playerForm.value.trim();
     if (playerName) {
         player.updatePlayerName(playerName);
+        recentPlayers.push(playerName);
+        updateRecentPlayers();
+        game.playerForm.value = '';
     }
 });
 
