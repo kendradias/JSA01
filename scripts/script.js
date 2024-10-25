@@ -1,5 +1,4 @@
 "use strict";
-console.log("here")
 
 // Game Object 
 const game = {
@@ -24,8 +23,8 @@ const game = {
     updatePlayerName: function (playerName) {
         this.playerNameDisplay.textContent = playerName;
     },
-    updatePlayerScore: function (playerScore) {
-        this.playerScoreDisplay.textContent = playerScore;
+    updatePlayerScore: function (score) {
+        this.playerScoreDisplay.textContent = score;
     },
 };
 
@@ -50,7 +49,7 @@ const recentPlayers = [];
 const recentPlayersList = document.getElementById('recent-players');
 
 function updateRecentPlayers() {
-    recentPlayersList.innerHTML = ''; //clears list
+    recentPlayersList.innerHTML = ''; //clear list before update
     const playersToShow = recentPlayers.slice(-5); //shows last 5 players
     playersToShow.forEach(player => {
         const option = document.createElement('option');
@@ -60,6 +59,8 @@ function updateRecentPlayers() {
 };
 
 // Event Listeners
+
+//Join Button
 game.joinGameButton.addEventListener('click', function() {
     const playerName = game.playerForm.value.trim();
     if (playerName) {
@@ -70,15 +71,22 @@ game.joinGameButton.addEventListener('click', function() {
         updateRecentPlayers();
         game.playerForm.value = ''; //clear input field after join
     } else {
-        alert('Please enter player name');
+        alert('Please enter player name'); //allow join only if name is entered
+    } 
+});
+
+//Start Button
+game.startGameButton.addEventListener('click', function(){
+    console.log('start button clicked')
+    game.toggleRunning();
+    if (game.isRunning) {
+        document.getElementById('player-form-container').classList.add('hidden'); //remove input field once game starts (doesnt work yet)
+        document.querySelector('main').classList.add('game-running'); //change main display once game starts (doesnt work yet)
+        console.log("entered if statement")
     }
 });
 
-game.startGameButton.addEventListener('click', function(){
-    game.toggleRunning();
-
-});
-
+//Score Button
 game.scorePointsButton.addEventListener('click', function() {
     if (game.isRunning) {
         player.scorePoints();
