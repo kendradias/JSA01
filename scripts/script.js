@@ -12,7 +12,10 @@ const game = {
     //methods
     toggleGame: function () {
         this.isRunning = !this.isRunning;
-        console.log(this.isRunning ? "Game Started" : "Game Paused"); // toggle main bg if game is paused vs running
+        const toggleButton = document.getElementById('toggle-game');
+        toggleButton.textContent = this.isRunning ? "Pause" : "Resume"
+
+        document.querySelector('main').classList.toggle('game-running', this.isRunning); // toggle main bg if game is paused vs running
     },
     addPlayer: function (player) {
         this.players.push(player);
@@ -22,11 +25,14 @@ const game = {
         this.scoreboard.innerHTML = ''; // clear before update
         this.players.forEach((player) => {
             const playerElement = document.createElement('div'); //creates div for each new player
-            playerElement.textContent = `${player.name}: ${player.score}`;
+            playerElement.textContent = (`${player.name} ${player.score}`);
             this.scoreboard.appendChild(playerElement);
         });
     },
     updatePlayerScore: function(player) {
+        if(!this.isRunning) {
+            return;
+        }
         const playerIndex = this.players.indexOf(player);
         if (playerIndex !== -1) {
             player.updateScore(Math.floor(Math.random() * 10) + 1);
@@ -36,7 +42,7 @@ const game = {
     switchPlayer: function() {
         if (this.players.length > 0) {
             this.activePlayerIndex = (this.activePlayerIndex + 1) % this.players.length;
-            console.log(`Active Player: ${this.players[this.activePlayerIndex].name}`); }
+        }
     },
 };
 
@@ -52,6 +58,19 @@ class Player {
     }
 }
 
+// recent players list properties and functionality
+const recentPlayers = [];
+const recentPlayersList = document.getElementById('recent-players');
+
+function updateRecentPlayers() {
+    recentPlayersList.innerHTML = ''; //clear list before update
+    const playersToShow = recentPlayers.slice(-5); //shows last 5 players
+    playersToShow.forEach(function (player) {
+        const option = document.createElement('option');
+        option.value = player;
+        recentPlayersList.appendChild(option);
+    });
+};
 // Event Listeners
 
 //Join Button
@@ -60,8 +79,9 @@ document.getElementById('join-game').addEventListener('click', function() {
     if (playerName) {
         new Player(playerName);
         // player.score = 0; // reset to 0
+        updateRecentPlayers();
         document.getElementById('player-name-input').value = ''
-        //game.playerFormContainer.style.display = 'none';
+        game.playerFormContainer.style.display = 'none';
     } else {
         alert('Please enter player name'); //allow join only if name is entered
     } 
@@ -75,8 +95,8 @@ document.getElementById('switch-player').addEventListener('click', function(){
 //Start Button
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('toggle-game').addEventListener('click', function(){
-        console.log('toggle button clicked')
         game.toggleGame();
+        game.querySelector('player-form-container').style.display = 'none';
     });
 });
 //Score Button
