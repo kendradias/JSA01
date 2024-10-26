@@ -8,8 +8,8 @@ const game = {
     gameBoard: document.getElementById('game-board'),
     scoreBoard: document.getElementById('score-board'),
     playerForm: document.getElementById('player-name-input'),
+    playerFormContainer: document.getElementById('player-form-container'),
     joinGameButton: document.getElementById('join-game'),
-    startGameButton: document.getElementById('start-game'),
     scorePointsButton: document.getElementById('score-points'),
     startGameButton: document.getElementById('start-game'),
     playerNameDisplay: document.getElementById('player-name'),
@@ -19,6 +19,8 @@ const game = {
         this.isRunning = !this.isRunning;
         this.gameBoard.classList.toggle('running', this.isRunning);
         this.startGameButton.textContent = this.isRunning ? 'Pause' : 'Start Game';
+
+        document.querySelector('main').classList.toggle('game-running', this.isRunning); // toggle main bg if game is paused vs running
     },
     updatePlayerName: function (playerName) {
         this.playerNameDisplay.textContent = playerName;
@@ -44,14 +46,14 @@ const player = {
     },
 };
 
-// recent players list properties and functionality - double click input field to display 1st time
+// recent players list properties and functionality
 const recentPlayers = [];
 const recentPlayersList = document.getElementById('recent-players');
 
 function updateRecentPlayers() {
     recentPlayersList.innerHTML = ''; //clear list before update
     const playersToShow = recentPlayers.slice(-5); //shows last 5 players
-    playersToShow.forEach(player => {
+    playersToShow.forEach(function (player) {
         const option = document.createElement('option');
         option.value = player;
         recentPlayersList.appendChild(option);
@@ -69,7 +71,7 @@ game.joinGameButton.addEventListener('click', function() {
         game.updatePlayerScore(player.score);
         recentPlayers.push(playerName);
         updateRecentPlayers();
-        game.playerForm.value = ''; //clear input field after join
+        game.playerFormContainer.style.display = 'none';
     } else {
         alert('Please enter player name'); //allow join only if name is entered
     } 
@@ -77,18 +79,13 @@ game.joinGameButton.addEventListener('click', function() {
 
 //Start Button
 game.startGameButton.addEventListener('click', function(){
-    console.log('start button clicked')
     game.toggleRunning();
-    if (game.isRunning) {
-        document.getElementById('player-form-container').classList.add('hidden'); //remove input field once game starts (doesnt work yet)
-        document.querySelector('main').classList.add('game-running'); //change main display once game starts (doesnt work yet)
-        console.log("entered if statement")
-    }
 });
 
 //Score Button
 game.scorePointsButton.addEventListener('click', function() {
     if (game.isRunning) {
         player.scorePoints();
+        //game.playerForm.value = ''; //clear input field after player starts scoring points
     }
 });

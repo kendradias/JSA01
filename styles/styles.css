@@ -40,10 +40,6 @@ html {
     gap: 10px;
 }
 
-.hidden {
-    display: none;
-}
-
 #game-buttons {
     display: flex;
     justify-content: flex-start;
@@ -52,18 +48,20 @@ html {
 
 /* Main Content Styling */
 main {
-    background-color: rgb(36, 36, 36);
     height: 100vh;
     max-width: 800px;
     border-radius: 8px;
-    background-image: url('../images/darksand.jpg');
+    background-image: none;
+    background-color: rgb(41, 41, 41);
     background-size: cover;
     font-family: sans-serif;
 }
 
 .game-running {
-    background-color: rgb(41, 41, 41);
+    background-image: url('../images/darksand.jpg');
+    background-size: cover;
 }
+
 footer {
     text-align: left;
 }
