@@ -5,87 +5,84 @@ const game = {
     //properties
     title: "Kendra's Game",
     isRunning: false,
-    gameBoard: document.getElementById('game-board'),
-    scoreBoard: document.getElementById('score-board'),
-    playerForm: document.getElementById('player-name-input'),
-    playerFormContainer: document.getElementById('player-form-container'),
-    joinGameButton: document.getElementById('join-game'),
-    scorePointsButton: document.getElementById('score-points'),
-    startGameButton: document.getElementById('start-game'),
-    playerNameDisplay: document.getElementById('player-name'),
-    playerScoreDisplay: document.getElementById('player-score'),
-    //methods
-    toggleRunning: function () {
-        this.isRunning = !this.isRunning;
-        this.gameBoard.classList.toggle('running', this.isRunning);
-        this.startGameButton.textContent = this.isRunning ? 'Pause' : 'Start Game';
+    players: [],
+    activePlayerIndex: 0,
+    scoreboard: document.getElementById('players-list'),
 
-        document.querySelector('main').classList.toggle('game-running', this.isRunning); // toggle main bg if game is paused vs running
+    //methods
+    toggleGame: function () {
+        this.isRunning = !this.isRunning;
+        console.log(this.isRunning ? "Game Started" : "Game Paused"); // toggle main bg if game is paused vs running
     },
-    updatePlayerName: function (playerName) {
-        this.playerNameDisplay.textContent = playerName;
+    addPlayer: function (player) {
+        this.players.push(player);
+        this.updateScoreboard()
     },
-    updatePlayerScore: function (score) {
-        this.playerScoreDisplay.textContent = score;
+    updateScoreboard: function () {
+        this.scoreboard.innerHTML = ''; // clear before update
+        this.players.forEach((player) => {
+            const playerElement = document.createElement('div'); //creates div for each new player
+            playerElement.textContent = `${player.name}: ${player.score}`;
+            this.scoreboard.appendChild(playerElement);
+        });
+    },
+    updatePlayerScore: function(player) {
+        const playerIndex = this.players.indexOf(player);
+        if (playerIndex !== -1) {
+            player.updateScore(Math.floor(Math.random() * 10) + 1);
+            this.updateScoreboard();
+        }
+    },
+    switchPlayer: function() {
+        if (this.players.length > 0) {
+            this.activePlayerIndex = (this.activePlayerIndex + 1) % this.players.length;
+            console.log(`Active Player: ${this.players[this.activePlayerIndex].name}`); }
     },
 };
 
 // Player Object
-const player = {
-    //properties
-    name: '',
-    score: 0,
-    //methods
-    updatePlayerName: function (playerName) {
-        this.playerName = playerName;
-        game.updatePlayerName(playerName);
-    },
-    scorePoints: function () {
-        this.score += 1;
-        game.updatePlayerScore(this.score);
-    },
-};
-
-// recent players list properties and functionality
-const recentPlayers = [];
-const recentPlayersList = document.getElementById('recent-players');
-
-function updateRecentPlayers() {
-    recentPlayersList.innerHTML = ''; //clear list before update
-    const playersToShow = recentPlayers.slice(-5); //shows last 5 players
-    playersToShow.forEach(function (player) {
-        const option = document.createElement('option');
-        option.value = player;
-        recentPlayersList.appendChild(option);
-    });
-};
+class Player {
+    constructor(name) {
+        this.name = name;
+        this.score = 0;
+        game.addPlayer(this); //add current player to game
+    }
+    updateScore(points) {
+        this.score += points;
+    }
+}
 
 // Event Listeners
 
 //Join Button
-game.joinGameButton.addEventListener('click', function() {
-    const playerName = game.playerForm.value.trim();
+document.getElementById('join-game').addEventListener('click', function() {
+    const playerName = document.getElementById('player-name-input').value.trim();
     if (playerName) {
-        player.updatePlayerName(playerName);
-        player.score = 0; // reset to 0
-        game.updatePlayerScore(player.score);
-        recentPlayers.push(playerName);
-        updateRecentPlayers();
-        game.playerFormContainer.style.display = 'none';
+        new Player(playerName);
+        // player.score = 0; // reset to 0
+        document.getElementById('player-name-input').value = ''
+        //game.playerFormContainer.style.display = 'none';
     } else {
         alert('Please enter player name'); //allow join only if name is entered
     } 
 });
 
-//Start Button
-game.startGameButton.addEventListener('click', function(){
-    game.toggleRunning();
+//Switch Player Button
+document.getElementById('switch-player').addEventListener('click', function(){
+    game.switchPlayer();
 });
 
+//Start Button
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('toggle-game').addEventListener('click', function(){
+        console.log('toggle button clicked')
+        game.toggleGame();
+    });
+});
 //Score Button
-game.scorePointsButton.addEventListener('click', function() {
-    if (game.isRunning) {
-        player.scorePoints();
-        //game.playerForm.value = ''; //clear input field after player starts scoring points
+document.getElementById('score-points').addEventListener('click', function() {
+    const activePlayer = game.players[game.activePlayerIndex];
+    if (activePlayer) {
+        game.updatePlayerScore(activePlayer);
     }
 });
