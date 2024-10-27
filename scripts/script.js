@@ -23,10 +23,15 @@ const game = {
     },
     updateScoreboard: function () {
         this.scoreboard.innerHTML = ''; // clear before update
-        this.players.forEach((player) => {
+        this.players.forEach((player, index) => {
             const playerElement = document.createElement('div'); //creates div for each new player
             playerElement.textContent = (`${player.name} ${player.score}`);
+            playerElement.dataset.index = index; // Add data attribute for index
+            if (index === this.activePlayerIndex) {
+                playerElement.classList.add('current-player'); //add highlight (hopefully lol)
+            }
             this.scoreboard.appendChild(playerElement);
+
         });
     },
     updatePlayerScore: function(player) {
@@ -35,12 +40,24 @@ const game = {
         }
         const playerIndex = this.players.indexOf(player);
         if (playerIndex !== -1) {
-            player.updateScore(Math.floor(Math.random() * 10) + 1);
+            player.updateScore(Math.floor(Math.random() * 10) + 2);
             this.updateScoreboard();
         }
     },
     switchPlayer: function() {
         if (this.players.length > 0) {
+            //remove highlight
+            const previousPlayer = this.scoreboard.children[this.activePlayerIndex];
+            if (previousPlayer) {
+                previousPlayer.classList.remove('current-player');
+            }
+            //highlist active player
+            const currentPlayer = this.scoreboard.children[this.activePlayerIndex]
+            if (currentPlayer) {
+                currentPlayer.classList.add('current-player');
+            }
+
+            //update active player
             this.activePlayerIndex = (this.activePlayerIndex + 1) % this.players.length;
         }
     },
@@ -81,7 +98,7 @@ document.getElementById('join-game').addEventListener('click', function() {
         // player.score = 0; // reset to 0
         updateRecentPlayers();
         document.getElementById('player-name-input').value = ''
-        game.playerFormContainer.style.display = 'none';
+        //game.playerFormContainer.style.display = 'none';
     } else {
         alert('Please enter player name'); //allow join only if name is entered
     } 
@@ -96,7 +113,9 @@ document.getElementById('switch-player').addEventListener('click', function(){
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('toggle-game').addEventListener('click', function(){
         game.toggleGame();
-        game.querySelector('player-form-container').style.display = 'none';
+        if (game.isRunning) {
+            document.getElementById('player-form-container').style.display = 'none'; // Adjust as needed
+        }
     });
 });
 //Score Button

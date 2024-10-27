@@ -19,7 +19,10 @@ html {
 
 #players-list {
     padding: 10px;
-    display: inline-block;
+}
+
+.current-player {
+    color: blue;
 }
 
 #player-info {
