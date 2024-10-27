@@ -54,7 +54,7 @@ html {
     gap: 10px;
 }
 
-#toggle-game, #join-game, #score-points, #switch-player, #end-game {
+.button-styling {
     border: none;
     background-color: transparent;
     color: rgb(203, 201, 201);
@@ -62,7 +62,7 @@ html {
     cursor: pointer;
 }
 
-#toggle-game:hover, #join-game:hover, #score-points:hover, #switch-player:hover, #end-game:hover {
+.button-styling:hover {
     color: rgb(214, 131, 213);
 }
 
