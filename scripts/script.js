@@ -15,7 +15,7 @@ const game = {
         const toggleButton = document.getElementById('toggle-game');
         toggleButton.textContent = this.isRunning ? "Pause" : "Resume"
 
-        document.querySelector('main').classList.toggle('game-running', this.isRunning); // toggle main bg if game is paused vs running
+        document.querySelector('main').classList.toggle('game-running', this.isRunning); // toggle background if game is paused vs running
     },
     addPlayer: function (player) {
         this.players.push(player);
@@ -96,9 +96,13 @@ document.getElementById('switch-player').addEventListener('click', function(){
 
 //Start/Toggle Button
 document.getElementById('toggle-game').addEventListener('click', function(){
-    game.toggleGame();
-    if (game.isRunning) {
-        document.getElementById('player-form-container').style.display = 'none'; // Adjust as needed
+    if(game.players.length > 0) {
+        game.toggleGame();
+        if (game.isRunning) {
+            document.getElementById('player-form-container').style.display = 'none'; // Adjust as needed
+        } 
+    } else {
+        alert('Please enter Player Name');
     }
 });
 
