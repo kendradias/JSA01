@@ -52,7 +52,7 @@ html {
     gap: 10px;
 }
 
-#toggle-game, #join-game, #score-points, #switch-player {
+#toggle-game, #join-game, #score-points, #switch-player, #end-game {
     border: none;
     background-color: transparent;
     color: white;
@@ -60,7 +60,7 @@ html {
     cursor: pointer;
 }
 
-#toggle-game:hover, #join-game:hover, #score-points:hover, #switch-player:hover {
+#toggle-game:hover, #join-game:hover, #score-points:hover, #switch-player:hover, #end-game:hover {
     color: rgb(154, 87, 155);
 }
 

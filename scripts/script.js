@@ -118,3 +118,8 @@ document.getElementById('score-points').addEventListener('click', function() {
         game.updatePlayerScore(activePlayer);
     }
 });
+
+//End Game Button
+document.getElementById('end-game').addEventListener('click', function(){
+    location.reload(); 
+});
