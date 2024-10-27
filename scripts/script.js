@@ -96,7 +96,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     //Switch Player Button
     document.getElementById('switch-player').addEventListener('click', function(){
-        game.switchPlayer();
+        if(game.isRunning) {
+            game.switchPlayer();
+        }
     });
     
     //Start/Toggle Button

@@ -8,7 +8,7 @@ html {
 
 /* Scoreboard Styling */
 #score-board {
-    background-color: rgb(255, 135, 253);
+    background-color: rgb(214, 131, 213);
     border-radius: 40px 40px 0 0;
     color: rgb(203, 201, 201);
     padding: 50px;
@@ -57,13 +57,13 @@ html {
 #toggle-game, #join-game, #score-points, #switch-player, #end-game {
     border: none;
     background-color: transparent;
-    color: rgb(203, 200, 200);
+    color: rgb(203, 201, 201);
     font-size: 18px;
     cursor: pointer;
 }
 
 #toggle-game:hover, #join-game:hover, #score-points:hover, #switch-player:hover, #end-game:hover {
-    color: rgb(154, 87, 155);
+    color: rgb(214, 131, 213);
 }
 
 /* Main Content Styling */
