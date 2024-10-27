@@ -55,7 +55,7 @@ const game = {
             //update active player
             this.activePlayerIndex = (this.activePlayerIndex + 1) % this.players.length;
 
-            //highlist active player
+            //highlight active player
             const currentPlayer = this.scoreboard.children[this.activePlayerIndex]
             if (currentPlayer) {
                 currentPlayer.classList.add('current-player');
@@ -80,10 +80,15 @@ class Player {
 
 //Join Button
 document.getElementById('join-game').addEventListener('click', function() {
-    const playerName = document.getElementById('player-name-input').value.trim();
+    const playerNameInput = document.getElementById('player-name-input');
+    const playerName = playerNameInput.value.trim();
+
     if (playerName) {
         new Player(playerName);
-        document.getElementById('player-name-input').value = ''
+        playerNameInput.value = ''
+        if (game.players.length > 0) {
+            playerNameInput.placeholder = 'Add Player'; //change placeholder to 'Add Player' once 1 has been added 
+        }
     } else {
         alert('Please enter player name'); //allow join only if name is entered
     } 
@@ -102,7 +107,7 @@ document.getElementById('toggle-game').addEventListener('click', function(){
             document.getElementById('player-form-container').style.display = 'none'; // Adjust as needed
         } 
     } else {
-        alert('Please enter Player Name');
+        alert('Enter atleast one player before starting the game'); // allow start game only when atleast 1 player has entered
     }
 });
 
