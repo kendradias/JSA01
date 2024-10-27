@@ -15,7 +15,10 @@ const game = {
         const toggleButton = document.getElementById('toggle-game');
         toggleButton.textContent = this.isRunning ? "Pause" : "Resume"
 
-        document.querySelector('main').classList.toggle('game-running', this.isRunning); //toggle background if game is paused vs running
+        document.querySelector('main').classList.toggle('game-running', this.isRunning); //toggle background 
+        if (game.isRunning) {
+            document.getElementById('player-form-container').style.display = 'none'; // remove input field when game is running
+        } 
     },
     addPlayer: function (player) {
         this.players.push(player);
@@ -31,7 +34,7 @@ const game = {
             playerElement.dataset.score =  player.score;
 
             if (index === this.activePlayerIndex) {
-                playerElement.classList.add('current-player'); //selects current player and applies highlight class styling
+                playerElement.classList.add('current-player');
             }
             this.scoreboard.appendChild(playerElement); //append to scoreboard
         });
@@ -78,8 +81,8 @@ class Player {
 
 // Event Listeners
 
-//Join Button
 document.addEventListener('DOMContentLoaded', function() {
+    //Join Button
     document.getElementById('join-game').addEventListener('click', function() {
         const playerNameInput = document.getElementById('player-name-input');
         const playerName = playerNameInput.value.trim();
@@ -105,9 +108,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('toggle-game').addEventListener('click', function(){
         if(game.players.length > 0) {
             game.toggleGame();
-            if (game.isRunning) {
-                document.getElementById('player-form-container').style.display = 'none';
-            } 
         } else {
             alert('Enter atleast one player before starting the game'); // allow start game only when atleast 1 player has entered
         }
