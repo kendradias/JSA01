@@ -79,47 +79,50 @@ class Player {
 // Event Listeners
 
 //Join Button
-document.getElementById('join-game').addEventListener('click', function() {
-    const playerNameInput = document.getElementById('player-name-input');
-    const playerName = playerNameInput.value.trim();
-
-    if (playerName) {
-        new Player(playerName);
-        playerNameInput.value = ''
-        if (game.players.length > 0) {
-            playerNameInput.placeholder = 'Add Player'; //change placeholder to 'Add Player' once 1 has been added 
-        }
-    } else {
-        alert('Please enter player name'); //allow join only if name is entered
-    } 
-});
-
-//Switch Player Button
-document.getElementById('switch-player').addEventListener('click', function(){
-    game.switchPlayer();
-});
-
-//Start/Toggle Button
-document.getElementById('toggle-game').addEventListener('click', function(){
-    if(game.players.length > 0) {
-        game.toggleGame();
-        if (game.isRunning) {
-            document.getElementById('player-form-container').style.display = 'none'; // Adjust as needed
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('join-game').addEventListener('click', function() {
+        const playerNameInput = document.getElementById('player-name-input');
+        const playerName = playerNameInput.value.trim();
+    
+        if (playerName) {
+            new Player(playerName);
+            playerNameInput.value = ''
+            if (game.players.length > 0) {
+                playerNameInput.placeholder = 'Add Player'; //change placeholder to 'Add Player' once 1 has been added 
+            }
+        } else {
+            alert('Please enter player name'); //allow join only if name is entered
         } 
-    } else {
-        alert('Enter atleast one player before starting the game'); // allow start game only when atleast 1 player has entered
-    }
-});
-
-//Score Button
-document.getElementById('score-points').addEventListener('click', function() {
-    const activePlayer = game.players[game.activePlayerIndex];
-    if (activePlayer) {
-        game.updatePlayerScore(activePlayer);
-    }
-});
-
-//End Game Button
-document.getElementById('end-game').addEventListener('click', function(){
-    location.reload(); 
+    });
+    
+    //Switch Player Button
+    document.getElementById('switch-player').addEventListener('click', function(){
+        game.switchPlayer();
+    });
+    
+    //Start/Toggle Button
+    document.getElementById('toggle-game').addEventListener('click', function(){
+        if(game.players.length > 0) {
+            game.toggleGame();
+            if (game.isRunning) {
+                document.getElementById('player-form-container').style.display = 'none'; // Adjust as needed
+            } 
+        } else {
+            alert('Enter atleast one player before starting the game'); // allow start game only when atleast 1 player has entered
+        }
+    });
+    
+    //Score Button
+    document.getElementById('score-points').addEventListener('click', function() {
+        const activePlayer = game.players[game.activePlayerIndex];
+        if (activePlayer) {
+            game.updatePlayerScore(activePlayer);
+        }
+    });
+    
+    //End Game Button
+    document.getElementById('end-game').addEventListener('click', function(){
+        location.reload(); 
+    });
+    
 });

@@ -46,16 +46,18 @@ html {
     gap: 10px;
 }
 
+/* Button Styling */
 #game-buttons {
     display: flex;
-    justify-content: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 10px;
 }
 
 #toggle-game, #join-game, #score-points, #switch-player, #end-game {
     border: none;
     background-color: transparent;
-    color: white;
+    color: rgb(203, 200, 200);
     font-size: 18px;
     cursor: pointer;
 }
