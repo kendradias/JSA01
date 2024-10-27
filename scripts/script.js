@@ -15,7 +15,7 @@ const game = {
         const toggleButton = document.getElementById('toggle-game');
         toggleButton.textContent = this.isRunning ? "Pause" : "Resume"
 
-        document.querySelector('main').classList.toggle('game-running', this.isRunning); // toggle background if game is paused vs running
+        document.querySelector('main').classList.toggle('game-running', this.isRunning); //toggle background if game is paused vs running
     },
     addPlayer: function (player) {
         this.players.push(player);
@@ -23,10 +23,10 @@ const game = {
         this.updateScoreboard()
     },
     updateScoreboard: function () {
-        this.scoreboard.innerHTML = ''; // clear before update
+        this.scoreboard.innerHTML = ''; //clear before update
         this.players.forEach((player, index) => {
             const playerElement = document.createElement('div'); //declare player Element creates div for each new player
-            playerElement.classList.add('player-entry'); // add class for styling
+            playerElement.classList.add('player-entry'); //add class for styling
             playerElement.dataset.name = player.name;
             playerElement.dataset.score =  player.score;
 
@@ -83,7 +83,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('join-game').addEventListener('click', function() {
         const playerNameInput = document.getElementById('player-name-input');
         const playerName = playerNameInput.value.trim();
-    
         if (playerName) {
             new Player(playerName);
             playerNameInput.value = ''
@@ -105,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if(game.players.length > 0) {
             game.toggleGame();
             if (game.isRunning) {
-                document.getElementById('player-form-container').style.display = 'none'; // Adjust as needed
+                document.getElementById('player-form-container').style.display = 'none';
             } 
         } else {
             alert('Enter atleast one player before starting the game'); // allow start game only when atleast 1 player has entered
@@ -124,5 +123,4 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('end-game').addEventListener('click', function(){
         location.reload(); 
     });
-    
 });
